@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-3.0.xsd">
+    
+    <!-- EMAIL JOB --> 
+    <bean id="emailSender" class="com.nr.fc.scheduler.EmailSender" />
+ 
+    <bean id="emailSenderJob" class="com.nr.fc.scheduler.EmailSenderJob" >
+        <property name="emailSender"  >
+            <ref bean="emailSender"/> 
+        </property>
+    </bean>
+    
+    <!-- Quartz Job -->
+    <bean name="EmailSendingJob" class="org.springframework.scheduling.quartz.JobDetailBean">
+        <property name="jobClass" value="com.nr.fc.scheduler.EmailSenderJob" />
+        <property name="jobDataAsMap">
+            <map>
+                <entry key="emailSender" value-ref="emailSender" />
+            </map>
+        </property>
+    </bean>
+    
+    
+    <!-- Cron Trigger, run every 5 seconds -->
+    <bean id="cronTriggerEmailSendingJob"  class="org.springframework.scheduling.quartz.CronTriggerBean">
+        <property name="jobDetail" ref="EmailSendingJob" />
+<!--        <property name="cronExpression" value="0 0/1 * 1/1 * ? *" />  EVERY ONE MIN -->
+       <!-- <property name="cronExpression" value="0 0/5 * 1/1 * ? *" /> EVERY FIVE MIN -->
+<!--        <property name="cronExpression" value="0 0/10 * 1/1 * ? *" /> EVERY TEN MIN -->
+    </bean>
+    
+
+
+<!--    <bean class="org.springframework.scheduling.quartz.SchedulerFactoryBean">
+        <property name="triggers">
+            <list>
+                
+                <ref bean="cronTriggerAlertSendingJob" />
+            </list>
+        </property>
+    </bean>-->
+    
+    
+ 
+</beans>

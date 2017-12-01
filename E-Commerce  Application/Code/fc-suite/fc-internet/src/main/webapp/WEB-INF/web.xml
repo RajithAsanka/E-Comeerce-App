@@ -1,0 +1,116 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<web-app version="3.0" xmlns="http://java.sun.com/xml/ns/javaee" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://java.sun.com/xml/ns/javaee http://java.sun.com/xml/ns/javaee/web-app_3_0.xsd">
+    <!-- SPRING CONFIGURATION BEGIN -->
+    <servlet>
+        <servlet-name>dispatcher</servlet-name>
+        <servlet-class>org.springframework.web.servlet.DispatcherServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet>
+        <servlet-name>StudentAtttachmentServelet</servlet-name>
+        <servlet-class>com.nr.fc.internet.servlets.StudentAtttachmentServelet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ProgramLogoServelet</servlet-name>
+        <servlet-class>com.nr.fc.internet.servlets.ProgramLogoServelet</servlet-class>
+    </servlet>
+    <servlet>
+        <servlet-name>ImportExportServlets</servlet-name>
+        <servlet-class>com.nr.fc.internet.servlets.ImportExportServlets</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>dispatcher</servlet-name>
+        <url-pattern>/</url-pattern>
+    </servlet-mapping>
+    <listener>
+        <listener-class>org.springframework.web.context.ContextLoaderListener</listener-class>
+    </listener>
+    <listener>
+        <listener-class>
+            org.springframework.security.web.session.HttpSessionEventPublisher
+        </listener-class>
+    </listener>
+    <!-- GZIP -->
+    <filter>
+        <filter-name>GZIPFilter</filter-name>
+        <filter-class>com.nr.fc.common.web.gzip.GZIPFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>GZIPFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+    <session-config>
+        <session-timeout>8</session-timeout>
+        <tracking-mode>COOKIE</tracking-mode>
+    </session-config>
+    <context-param>
+        <param-name>contextConfigLocation</param-name>
+        <param-value>/WEB-INF/spring/applicationContext.xml,/WEB-INF/spring/springSecurity.xml,/WEB-INF/spring/Spring-Quartz.xml</param-value>
+    </context-param>
+    <!-- Spring Security -->
+    <!-- <filter> <filter-name>springSecurityFilterChain</filter-name> <filter-class> 
+    org.springframework.web.filter.DelegatingFilterProxy </filter-class> </filter> -->
+    <!-- <filter-mapping> <filter-name>springSecurityFilterChain</filter-name> 
+    <url-pattern>/*</url-pattern> </filter-mapping> -->
+    <!-- SPRING CONFIGURATION END -->
+    <!-- SPRING SECURITY SECTION BEGIN -->
+    <!-- <filter> <filter-name>springSecurityFilterChain</filter-name> <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class> 
+    </filter> <filter-mapping> <filter-name>springSecurityFilterChain</filter-name> 
+    <url-pattern>/*</url-pattern> </filter-mapping> -->
+    <!-- SPRING SECURITY SECTION BEGIN -->
+    <filter>
+        <display-name>springMultipartFilter</display-name>
+        <filter-name>springMultipartFilter</filter-name>
+        <filter-class>org.springframework.web.multipart.support.MultipartFilter</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>springMultipartFilter</filter-name>
+        <url-pattern>/*</url-pattern>
+    </filter-mapping>
+    <filter>
+        <display-name>springSecurityFilterChain</display-name>
+        <filter-name>springSecurityFilterChain</filter-name>
+        <filter-class>org.springframework.web.filter.DelegatingFilterProxy</filter-class>
+    </filter>
+    <filter-mapping>
+        <filter-name>springSecurityFilterChain</filter-name>
+        <url-pattern>/*</url-pattern>
+        <dispatcher>ERROR</dispatcher>
+        <dispatcher>FORWARD</dispatcher>
+        <dispatcher>REQUEST</dispatcher>
+    </filter-mapping>
+    <servlet-mapping>
+        <servlet-name>StudentAtttachmentServelet</servlet-name>
+        <url-pattern>/attachment</url-pattern>
+    </servlet-mapping>
+    <servlet-mapping>
+        <servlet-name>ProgramLogoServelet</servlet-name>
+        <url-pattern>/program-logo</url-pattern>
+    </servlet-mapping>
+    <error-page>
+        <error-code>404</error-code>
+        <location>/WEB-INF/error/404.jsp</location>
+    </error-page>
+    <error-page>
+        <error-code>403</error-code>
+        <location>/WEB-INF/error/403.jsp</location>
+    </error-page>
+    <servlet>
+        <servlet-name>studentImageServlet</servlet-name>
+        <servlet-class>com.nr.fc.internet.servlets.StudentImageServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>studentImageServlet</servlet-name>
+        <url-pattern>/image</url-pattern>
+    </servlet-mapping>
+    <servlet>
+        <servlet-name>employeeImageServlet</servlet-name>
+        <servlet-class>com.nr.fc.internet.servlets.EmployeeImageServlet</servlet-class>
+        <load-on-startup>1</load-on-startup>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>employeeImageServlet</servlet-name>
+        <url-pattern>/employee-image</url-pattern>
+    </servlet-mapping>
+</web-app>

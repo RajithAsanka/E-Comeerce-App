@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans:beans xmlns="http://www.springframework.org/schema/security"
+             xmlns:beans="http://www.springframework.org/schema/beans" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+             xsi:schemaLocation="http://www.springframework.org/schema/beans
+	http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+	http://www.springframework.org/schema/security
+	http://www.springframework.org/schema/security/spring-security-3.2.xsd">
+
+    <http auto-config="true" use-expressions="true">
+
+        <!-- User Management Setup  -->
+        <intercept-url pattern="/admin/create-user-category" access="hasRole('1135')" />
+        <intercept-url pattern="/admin/create-role" access="hasRole('1136')" />
+        <intercept-url pattern="/admin/search-role" access="hasRole('1137')" />        
+        <intercept-url pattern="/admin/modify-role" access="hasRole('1138')" />
+        <intercept-url pattern="/admin/role-profile" access="hasRole('1139')" />
+        <intercept-url pattern="/admin/search-registered-users" access="hasRole('1140')" />
+        <intercept-url pattern="/admin/create-approve-user" access="hasRole('1141')" />
+        <intercept-url pattern="/admin/create-user-modify" access="hasRole('1142')" />
+        <intercept-url pattern="/admin/create-user-unlock" access="hasRole('1143')" />        
+        <intercept-url pattern="/admin/create-user-unreject" access="hasRole('1144')" />
+        <intercept-url pattern="/admin/my-childs" access="hasRole('1152')" />
+        
+     
+        <!-- Alert Notification -->
+        <intercept-url pattern="/admin/create-alert" access="hasRole('1190')" />
+        <intercept-url pattern="/admin/search-alert" access="hasRole('1191')" />
+        <intercept-url pattern="/admin/custom-alert-profile" access="hasRole('1192')" />
+        
+        
+        <custom-filter ref="ajaxTimeoutRedirectFilter" after="EXCEPTION_TRANSLATION_FILTER" />
+        <form-login login-page="/login" default-target-url="/common/dashboard"
+                    always-use-default-target="true" authentication-failure-handler-ref="customAuthenticationFailureHandler"
+                    authentication-success-handler-ref="customAuthenticationSuccessHandler" />
+        <logout success-handler-ref="customLogoutSuccessHandler"
+                invalidate-session="true" />
+        <!-- <csrf /> -->
+    </http>
+
+    <authentication-manager alias="authManager">
+        <authentication-provider user-service-ref="userLoginHelper">
+            <password-encoder ref="encoder" />
+        </authentication-provider>
+    </authentication-manager>
+
+    <beans:bean id="customLogoutSuccessHandler"
+                class="com.nr.fc.web.security.filter.CustomLogoutSuccessHandler">
+    </beans:bean>
+
+    <beans:bean id="customAuthenticationFailureHandler"
+                class="com.nr.fc.web.security.filter.CustomAuthenticationFailureHandler">
+    </beans:bean>
+
+    <beans:bean id="customAuthenticationSuccessHandler"
+                class="com.nr.fc.web.security.filter.CustomAuthenticationSuccessHandler">
+    </beans:bean>
+
+    <beans:bean id="ajaxTimeoutRedirectFilter"
+                class="com.nr.fc.web.security.filter.AjaxTimeoutRedirectFilter">
+    </beans:bean>
+
+    <beans:bean id="authenticationTrustResolver"
+                class="org.springframework.security.authentication.AuthenticationTrustResolverImpl" />
+
+
+    <beans:bean id="securityContextAccessor"
+                class="com.nr.fc.web.security.filter.SecurityContextAccessor" />
+
+</beans:beans>
