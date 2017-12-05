@@ -198,6 +198,11 @@
             <artifactId>fc-common</artifactId>
             <version>${project.version}</version>
         </dependency>
+        <dependency>
+            <groupId>com.imperia</groupId>
+            <artifactId>ecommerce-client</artifactId>
+            <version>1.0-SNAPSHOT</version>
+        </dependency>
     </dependencies>             
 
 
