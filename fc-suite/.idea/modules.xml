@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ProjectModuleManager">
+    <modules>
+      <module fileurl="file://$PROJECT_DIR$/ecommerce-client/ecommerce-client.iml" filepath="$PROJECT_DIR$/ecommerce-client/ecommerce-client.iml" />
+      <module fileurl="file://$PROJECT_DIR$/fc-common/fc-common.iml" filepath="$PROJECT_DIR$/fc-common/fc-common.iml" />
+      <module fileurl="file://$PROJECT_DIR$/fc-core/fc-core.iml" filepath="$PROJECT_DIR$/fc-core/fc-core.iml" />
+      <module fileurl="file://$PROJECT_DIR$/fc-internet/fc-internet.iml" filepath="$PROJECT_DIR$/fc-internet/fc-internet.iml" />
+      <module fileurl="file://$PROJECT_DIR$/fc-model/fc-model.iml" filepath="$PROJECT_DIR$/fc-model/fc-model.iml" />
+      <module fileurl="file://$PROJECT_DIR$/fc-suite.iml" filepath="$PROJECT_DIR$/fc-suite.iml" />
+    </modules>
+  </component>
+</project>

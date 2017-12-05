@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="fc-internet:war">
+    <output-path>$PROJECT_DIR$/fc-internet/target</output-path>
+    <root id="archive" name="fc-internet-1.0.war">
+      <element id="artifact" artifact-name="fc-internet:war exploded" />
+    </root>
+  </artifact>
+</component>
