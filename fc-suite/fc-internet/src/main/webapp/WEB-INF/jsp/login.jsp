@@ -21,7 +21,7 @@
         <!-- ############# HEADER ############# -->
         <div class="container logo-wrapper">
             <a href="login">
-                <img src="${pageContext.servletContext.contextPath}/resources/images/logo-TFC.PNG" />
+                <img src="${pageContext.servletContext.contextPath}/resources/images/service-ecommerce-dash.png" />
             </a>
         </div>
         <div class="container login-wrapper">
@@ -87,7 +87,7 @@
                 </div>
             </div>
             <div class="footer">
-                <p>&#169; 2017, The First Credit. All rights reserved.</p>   
+                <p>&#169; 2018,The E-commerce Application. All rights reserved.</p>   
             </div>
         </div>
         <!-- ############# FOOTER ############# -->

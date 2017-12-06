@@ -27,11 +27,11 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 /**
  *
- * @author Naveen
+ * @author Rajith
  */
 @Controller
-@RequestMapping(value = ServicePath.ADMIN_PREFIX + ServicePath.CREATE_GROUP)
-public class GroupController {
+@RequestMapping(value = ServicePath.ADMIN_PREFIX + ServicePath.CREATE_CATEGORY)
+public class CategoryController {
 
     @Autowired
     private CustomerGroupService customerGroupService;
@@ -40,19 +40,14 @@ public class GroupController {
     @Autowired
     private GroupJsonUtil groupJsonUtil;
 
-    private static final Logger LOGGER = LoggerFactory.getLogger(GroupController.class);
+    private static final Logger LOGGER = LoggerFactory.getLogger(CategoryController.class);
 
     @RequestMapping(value = "/save", method = RequestMethod.POST, headers = "Accept=application/json")
     @ResponseBody
-    public JsonReturn save(@RequestParam(value = "groupName", required = true) String groupName,
-            @RequestParam(value = "establishment", required = true) String establishment,
-            @RequestParam(value = "groupOfficer", required = true) String groupOfficerId,
-            @RequestParam(value = "meetingDay", required = true) String meetingDay,
-            @RequestParam(value = "groupBranch", required = true) String groupBranch,
-            @RequestParam(value = "groupAddress", required = true) String groupAddress,
-            @RequestParam(value = "contactNumber", required = true) String contactNumber,
-            @RequestParam(value = "details", required = true) String details,
-            @RequestParam(value = "status", required = true) String status,
+    public JsonReturn save(@RequestParam(value = "categoryName", required = false) String categoryName,
+            @RequestParam(value = "maincategory", required = false) String maincategory,
+            @RequestParam(value = "description", required = false) String description,
+            @RequestParam(value = "status", required = false) String status,
             @RequestParam(value = "username", required = true) String username) {
 
         JsonReturn jsonReturn = new JsonReturn();
@@ -60,10 +55,9 @@ public class GroupController {
 
         try {
 
-            customerGroupObj.setGroupName(groupName);
-            customerGroupObj.setDateOfEstablishment(DateUtil.stringToDate(establishment, Formats.DEFAULTDATE));
+            customerGroupObj.setGroupName("");
 
-            Employee employee = employeeService.findByEmployeeId(groupOfficerId);
+            Employee employee = employeeService.findByEmployeeId("");
 
             if (null != employee) {
 
@@ -72,20 +66,11 @@ public class GroupController {
             } else {
                 throw new BussinessException("Employee Does Not Exist !");
             }
-
-            customerGroupObj.setMeetingDate(DateUtil.stringToDate(meetingDay, Formats.DEFAULTDATE));
-            customerGroupObj.setBranch(groupBranch);
-            customerGroupObj.setPrimaryAddress(groupAddress);
-            customerGroupObj.setPrimaryContact(contactNumber);
-            customerGroupObj.setDescription(details);
-            customerGroupObj.setStatus(status);
-            customerGroupObj.setAddedBy(username);
-
             customerGroupService.Save(customerGroupObj);
 
             jsonReturn.setSuccess("true");
             jsonReturn.setResult(customerGroupObj.getGroupId());
-   
+
         } catch (BussinessException e) {
             jsonReturn.setSuccess("false");
             jsonReturn.setErrorMessage(e.getMsg());
@@ -100,8 +85,7 @@ public class GroupController {
         }
         return jsonReturn;
     }
-    
-    
+
     @RequestMapping(value = "/update", method = RequestMethod.POST, headers = "Accept=application/json")
     @ResponseBody
     public JsonReturn update(
@@ -118,40 +102,39 @@ public class GroupController {
             @RequestParam(value = "username", required = true) String username) {
 
         JsonReturn jsonReturn = new JsonReturn();
-       
 
         try {
-            
-           CustomerGroup object= customerGroupService.findByGroupId(groupId);
-            
-            if(null!=object){
-                
-            object.setDateOfEstablishment(DateUtil.stringToDate(establishment, Formats.DEFAULTDATE));
 
-            Employee employee = employeeService.findByEmployeeId(groupOfficerId);
+            CustomerGroup object = customerGroupService.findByGroupId(groupId);
 
-            if (null != employee) {
+            if (null != object) {
 
-                object.setEmployee(employee);
+                object.setDateOfEstablishment(DateUtil.stringToDate(establishment, Formats.DEFAULTDATE));
+
+                Employee employee = employeeService.findByEmployeeId(groupOfficerId);
+
+                if (null != employee) {
+
+                    object.setEmployee(employee);
+
+                } else {
+                    throw new BussinessException("Employee Does Not Exist !");
+                }
+
+                object.setMeetingDate(DateUtil.stringToDate(meetingDay, Formats.DEFAULTDATE));
+                object.setBranch(groupBranch);
+                object.setPrimaryAddress(groupAddress);
+                object.setPrimaryContact(contactNumber);
+                object.setDescription(details);
+                object.setStatus(status);
+
+                customerGroupService.update(object);
+                jsonReturn.setSuccess("true");
+                jsonReturn.setResult(object.getGroupId());
 
             } else {
-                throw new BussinessException("Employee Does Not Exist !");
-            }
 
-            object.setMeetingDate(DateUtil.stringToDate(meetingDay, Formats.DEFAULTDATE));
-            object.setBranch(groupBranch);
-            object.setPrimaryAddress(groupAddress);
-            object.setPrimaryContact(contactNumber);
-            object.setDescription(details);
-            object.setStatus(status);
-        
-            customerGroupService.update(object);
-            jsonReturn.setSuccess("true");
-            jsonReturn.setResult(object.getGroupId());
-            
-            }else{
-                
-                 throw new BussinessException("Group Does Not Exist !");
+                throw new BussinessException("Group Does Not Exist !");
             }
 
         } catch (BussinessException e) {
@@ -168,9 +151,6 @@ public class GroupController {
         }
         return jsonReturn;
     }
-    
-    
-    
 
     @RequestMapping(value = "/find/groups", method = RequestMethod.GET, headers = "Accept=application/json")
     @ResponseBody

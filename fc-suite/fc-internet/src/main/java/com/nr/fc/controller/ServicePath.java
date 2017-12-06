@@ -2,7 +2,7 @@ package com.nr.fc.controller;
 
 /**
  *
- * @author Amith
+ * @author Rajith
  */
 public class ServicePath {
 
@@ -25,8 +25,8 @@ public class ServicePath {
     public static final String USER_RESTRICTION = "/user-restriction";
     
     
-//============================== Group Management ======================================
-  public static final String CREATE_GROUP = "/create-group";
+//============================== Category Management ======================================
+  public static final String CREATE_CATEGORY = "/create-category";
   
 //============================== Customer Management ======================================
    public static final String CREATE_CUSTOMER = "/create-customer";

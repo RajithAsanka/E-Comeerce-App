@@ -149,7 +149,7 @@
                 <!-- LOGO -->
                 <div class="col-xs-8 col-sm-2">
                     <div class="logo">
-                        <img id="logoPic" src="${pageContext.servletContext.contextPath}/resources/images/logo-TFC-blue.PNG" />
+                        <img id="logoPic" src="${pageContext.servletContext.contextPath}/resources/images/service-ecommerce.png" />
                     </div>
                 </div>
                 <!-- /LOGO -->
@@ -259,33 +259,8 @@
                 </div>
             </div>
 
-            <script>
-                        $(document).ready(
-                        function () {
-
-                        $.ajax({
-                        type: "GET",
-                                url: '${pageContext.servletContext.contextPath}/admin/user-alert/findByUsername/json',
-                                data: {
-                                username:,
-                                        userType:
-                                },
-                                dataType: "json",
-                                context: this,
-                                success: function (response) {
-                                console.log(response);
-                                        $("#user-nortification").empty();
-                                        var studentTemp = "";
-                                        for (var alerts = 0; alerts < response.length; alerts++) {
-                                studentTemp += "<a role='menuitem' tabindex='-1' href='#'>" + response[alerts].massage + "</a>";
-                                }
-                                $("#user-nortification").append(studentTemp);
-                                },
-                                error: function (error) {
-                                alert("Error");
-                                }
-                        });
-                        });</script>
+            
+                       
             <style>
                 .user-function-menu .my-alert-class{
 
@@ -382,27 +357,6 @@
             <!--Greetings message-->
             <script type="text/javascript">
                                 $(document).ready(function () {
-
-
-
-                        getSavedData();
-                                function getSavedData() {
-                                $.ajax({
-                                type: "GET",
-                                        url: "user-restriction/getLogInUserCourseList",
-//                        data: {                        
-//                            courseId: "02"
-//                        },
-                                        success: function (data) {
-                                        console.log(data);
-                                        },
-                                        error: function (error) {
-
-                                        console.log("error");
-                                        }
-                                });
-                                }
-
                         var $userGreeting = $("#user-greeting");
                                 var thehours = new Date().getHours();
                                 if (thehours >= 0 && thehours < 12) {

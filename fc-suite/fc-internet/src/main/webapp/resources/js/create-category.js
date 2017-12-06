@@ -1,9 +1,9 @@
 // #############################
 // VARIABLES
 // #############################
-var saveUrl = "create-group/save";
-var readUrl = "create-group/find/groups";
-var updateUrl = "create-group/update";
+var saveUrl = "create-category/save";
+var readUrl = "create-category/find";
+var updateUrl = "create-category/update";
 
 var token = $("#txtSecurityToken").val();
 var username = $("#txtUserName").val();
@@ -15,12 +15,10 @@ var addBtn = $("#add");
 //INITIALIZATION
 //#############################
 
-//document.title = "MISY Myanmar International School - Country Form";
-
 function initTable() {
-    table = $('#group-table').bootstrapTable({
+    table = $('#category-table').bootstrapTable({
         method: 'get',
-        url: readUrl,
+        url: "" ,
         cache: false,
         height: 350,
         striped: true,
@@ -32,8 +30,14 @@ function initTable() {
         minimumCountColumns: 2,
         clickToSelect: true,
         columns: [{
-                field: 'groupName',
-                title: 'Group Name',
+                field: 'categoryName',
+                title: 'Category Name',
+                align: 'left',
+                valign: 'bottom',
+                sortable: true
+            }, {
+                field: 'mainCategory',
+                title: 'Main Category',
                 align: 'left',
                 valign: 'bottom',
                 sortable: true
@@ -44,14 +48,6 @@ function initTable() {
                 valign: 'bottom',
                 sortable: true
             }, {
-                field: 'addmember',
-                title: 'Add Member',
-                align: 'left',
-                valign: 'bottom',
-                sortable: true,
-                formatter: operateFormatterAction,
-                events: operateEventAddmemeber
-            },{
                 field: 'action',
                 title: 'Edit Group',
                 align: 'left',
@@ -64,10 +60,6 @@ function initTable() {
 }
 
 function initReference() {
-
-    document.getElementById("create-country").setAttribute("href", "create-country");
-    document.getElementById("create-state").setAttribute("href", "create-state");
-    document.getElementById("create-city").setAttribute("href", "create-city");
 }
 
 //#############################
@@ -75,12 +67,12 @@ function initReference() {
 //#############################
 $(document).ready(function () {
     $('.active').removeClass('active');
-    $("#common-menu").addClass("active");  
+    $("#category-menu").addClass("active");
     //initReference();
     //intilizing table
     initTable();
     //common-dropdown functions
-    loadData();
+    // loadData();
 });
 
 //#############################
@@ -88,37 +80,17 @@ $(document).ready(function () {
 //#############################
 function getData() {
     allData = [{
-            title: "Group Name",
-            colomn: "groupName",
-            value: $("#group-name").val()
+            title: "Category Name",
+            colomn: "categoryName",
+            value: $("#category-name").val()
         }, {
-            title: "Date of Establishment",
-            colomn: "establishment",
-            value: $("#establishment").val()
+            title: "Main Category",
+            colomn: "maincategory",
+            value: $("#mainCategory").val()
         }, {
-            title: "Group Officer",
-            colomn: "groupOfficer",
-            value: $("#group-officer").val()
-        }, {
-            title: "Meeting Day",
-            colomn: "meetingDay",
-            value: $("#meeting-day").val()
-        }, {
-            title: "Group Branch",
-            colomn: "groupBranch",
-            value: $("#group-Branch").val()
-        }, {
-            title: "Group Address",
-            colomn: "groupAddress",
-            value: $("#group-address").val()
-        }, {
-            title: "Contact Number",
-            colomn: "contactNumber",
-            value: $("#group-contact-number").val()
-        }, {
-            title: "",
-            colomn: "details",
-            value: $("#details").val()
+            title: "Description",
+            colomn: "description",
+            value: $("#description").val()
         }, {
             title: "Status",
             colomn: "status",
@@ -141,7 +113,7 @@ function getUpdateData() {
             title: "",
             colomn: "groupId",
             value: $("#group-id").val()
-        },{
+        }, {
             title: "Group Name",
             colomn: "groupName",
             value: $("#group-name").val()
@@ -191,8 +163,6 @@ function getUpdateData() {
 //#############################
 //EVENTS
 //#############################
-
-
 addBtn.click(function () {
     //show confirmation message to save
     buttonstatus = $(this).html();
@@ -207,12 +177,7 @@ addBtn.click(function () {
 
 
 function validateForm(msg) {
-
-    //  if (isValidCountry()) {
     showSaveconfirmation(msg);
-    // } else {
-    //  focusInvalid();
-    //}
 }
 
 
@@ -244,13 +209,12 @@ function generateViewData(data) {
 
 function showSaveconfirmation(msg) {
     //get current data to save
-    
     if (msg == "Add") {
-     //saves new 
-     var gatheredData = getData();
-    }else{
-        
-     var gatheredData = getUpdateData();
+        //saves new 
+        var gatheredData = getData();
+    } else {
+
+        var gatheredData = getUpdateData();
     }
     BootstrapDialog.show({
         title: 'Save Confirmation',
@@ -408,18 +372,18 @@ window.operateEvents = {
 
 window.operateEventAddmemeber = {
     'click .addmemeber': function (e, value, row, index) {
-        console.log("clicked",row);
+        console.log("clicked", row);
         window.location.href = "create-member?groupId=" + row.groupId;
     }
 };
 
 
-
-function loadData() {
-   
-    //Loads from database
-    data = ajaxData(readUrl, "GET", token);
-    //Loading database data to bootstrap table
-    table.bootstrapTable('load', data);
-
-}
+//
+//function loadData() {
+//
+//    //Loads from database
+//    data = ajaxData(readUrl, "GET", token);
+//    //Loading database data to bootstrap table
+//    table.bootstrapTable('load', data);
+//
+//}
