@@ -1,6 +1,8 @@
 package com.imperia.core;
 
+import com.imperia.CategoryResourceClient;
 import com.imperia.UserResourceClient;
+import com.imperia.impl.CategoryResourceClientImpl;
 import com.imperia.impl.UserResourceClientImpl;
 
 import java.io.IOException;
@@ -19,6 +21,8 @@ public class ResourceClientProxyPool {
     protected String targetBaseServiceURL = null;
 
     private UserResourceClient userResourceClient;
+
+    private CategoryResourceClient categoryResourceClient;
 
     protected ResourceClientProxyPool(final String targetBaseServiceURL) {
         this.targetBaseServiceURL = targetBaseServiceURL;
@@ -55,5 +59,12 @@ public class ResourceClientProxyPool {
             userResourceClient = new UserResourceClientImpl(this.targetBaseServiceURL + "/user-mgt");
         }
         return userResourceClient;
+    }
+
+    public CategoryResourceClient getCategoryResourceClient() {
+        if (categoryResourceClient == null) {
+            categoryResourceClient = new CategoryResourceClientImpl(this.targetBaseServiceURL + "/user-mgt");
+        }
+        return categoryResourceClient;
     }
 }
