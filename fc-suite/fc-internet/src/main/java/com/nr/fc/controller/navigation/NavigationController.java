@@ -44,10 +44,10 @@ public class NavigationController {
     }
     
     //##################################
-    //Category creation
+    //Item creation
     //##################################
     @RequestMapping(value = NavigationPath.ADMIN_PREFIX + NavigationPath.CREATE_ITEM, method = RequestMethod.GET)
     public String createItem() {
-        return "create-items";
+        return "create-item";
     }
 }

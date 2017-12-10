@@ -5,7 +5,6 @@ import com.imperia.core.AbstractRestClient;
 
 import javax.ws.rs.InternalServerErrorException;
 import javax.ws.rs.core.MultivaluedHashMap;
-import javax.ws.rs.core.MultivaluedMap;
 import javax.ws.rs.core.Response;
 
 /**
@@ -36,4 +35,7 @@ public class UserResourceClientImpl extends AbstractRestClient implements UserRe
         }
 
     }
+    
+    
+    
 }

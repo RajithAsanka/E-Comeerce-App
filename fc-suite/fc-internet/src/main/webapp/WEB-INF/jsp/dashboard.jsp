@@ -47,7 +47,7 @@
                                     </a> 
                                 </li>  
                                 <li>
-                                    <a href="#" class="dash-nav" id="submenu-product">                                          
+                                    <a href="#" class="dash-nav" id="submenu-item">                                          
                                         <i class="fa fa-wrench"></i>
                                         <span class="nav-text">Item</span>
                                     </a> 
@@ -74,6 +74,17 @@
                                         <a href="${pageContext.request.contextPath}/admin/create-category" class=""> 
                                             <i class="fa fa-tags"></i>
                                             <span class="nav-text">Add Category</span>
+                                        </a> 
+                                    </li>                                                                                                          
+                                </ul>
+                            </div>
+                            <div class="submenu submenu-item clearfix" id=""> 
+                                <h4>Item</h4> 
+                                <ul class="submenu-nav">
+                                    <li>
+                                        <a href="${pageContext.request.contextPath}/admin/create-item" class=""> 
+                                            <i class="fa fa-tags"></i>
+                                            <span class="nav-text">Add Item</span>
                                         </a> 
                                     </li>                                                                                                          
                                 </ul>

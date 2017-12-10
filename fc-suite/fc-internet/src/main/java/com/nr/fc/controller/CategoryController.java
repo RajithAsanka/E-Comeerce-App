@@ -4,18 +4,11 @@
  * and open the template in the editor.
  */
 package com.nr.fc.controller;
-
+import com.imperia.core.ResourceClientProxyPool;
 import com.nr.fc.controller.util.GroupJsonUtil;
 import com.nr.fc.exception.BussinessException;
-import com.nr.fc.json.model.GroupJson;
 import com.nr.fc.json.model.JsonReturn;
-import com.nr.fc.model.CustomerGroup;
-import com.nr.fc.model.Employee;
-import com.nr.fc.service.customergroup.CustomerGroupService;
-import com.nr.fc.service.employee.EmployeeService;
-import com.nr.fc.util.DateUtil;
-import com.nr.fc.util.DateUtil.Formats;
-import java.util.List;
+import com.nr.fc.request.CategoryRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -34,10 +27,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 public class CategoryController {
 
     @Autowired
-    private CustomerGroupService customerGroupService;
-    @Autowired
-    private EmployeeService employeeService;
-    @Autowired
     private GroupJsonUtil groupJsonUtil;
 
     private static final Logger LOGGER = LoggerFactory.getLogger(CategoryController.class);
@@ -51,25 +40,19 @@ public class CategoryController {
             @RequestParam(value = "username", required = true) String username) {
 
         JsonReturn jsonReturn = new JsonReturn();
-        CustomerGroup customerGroupObj = new CustomerGroup();
 
         try {
 
-            customerGroupObj.setGroupName("");
+            ResourceClientProxyPool.getInstance().getUserResourceClient().getUser();
 
-            Employee employee = employeeService.findByEmployeeId("");
-
-            if (null != employee) {
-
-                customerGroupObj.setEmployee(employee);
-
-            } else {
-                throw new BussinessException("Employee Does Not Exist !");
-            }
-            customerGroupService.Save(customerGroupObj);
+            CategoryRequest categoryRequest = new CategoryRequest();
+            categoryRequest.setMainCategory(maincategory);
+            categoryRequest.setDescription(description);
+            categoryRequest.setStatus(status);
+            categoryRequest.setUserName(username);
 
             jsonReturn.setSuccess("true");
-            jsonReturn.setResult(customerGroupObj.getGroupId());
+            jsonReturn.setResult("");
 
         } catch (BussinessException e) {
             jsonReturn.setSuccess("false");
@@ -103,63 +86,16 @@ public class CategoryController {
 
         JsonReturn jsonReturn = new JsonReturn();
 
-        try {
+        jsonReturn.setSuccess("true");
+        jsonReturn.setResult("");
 
-            CustomerGroup object = customerGroupService.findByGroupId(groupId);
-
-            if (null != object) {
-
-                object.setDateOfEstablishment(DateUtil.stringToDate(establishment, Formats.DEFAULTDATE));
-
-                Employee employee = employeeService.findByEmployeeId(groupOfficerId);
-
-                if (null != employee) {
-
-                    object.setEmployee(employee);
-
-                } else {
-                    throw new BussinessException("Employee Does Not Exist !");
-                }
-
-                object.setMeetingDate(DateUtil.stringToDate(meetingDay, Formats.DEFAULTDATE));
-                object.setBranch(groupBranch);
-                object.setPrimaryAddress(groupAddress);
-                object.setPrimaryContact(contactNumber);
-                object.setDescription(details);
-                object.setStatus(status);
-
-                customerGroupService.update(object);
-                jsonReturn.setSuccess("true");
-                jsonReturn.setResult(object.getGroupId());
-
-            } else {
-
-                throw new BussinessException("Group Does Not Exist !");
-            }
-
-        } catch (BussinessException e) {
-            jsonReturn.setSuccess("false");
-            jsonReturn.setErrorMessage(e.getMsg());
-            jsonReturn.setErrorCode("123");
-            e.printStackTrace();
-        } catch (Exception e) {
-            jsonReturn.setSuccess("false");
-            jsonReturn.setErrorMessage(e.getMessage());
-            jsonReturn.setErrorCode("123");
-            LOGGER.error("Exception Occured", e);
-            e.printStackTrace();
-        }
         return jsonReturn;
     }
 
-    @RequestMapping(value = "/find/groups", method = RequestMethod.GET, headers = "Accept=application/json")
-    @ResponseBody
-    public List<GroupJson> findByGroupId() {
-
-        List<CustomerGroup> customerGroup = customerGroupService.findAllGroups();
-
-        return groupJsonUtil.toJson(customerGroup);
-
-    }
-
+//    @RequestMapping(value = "/find/groups", method = RequestMethod.GET, headers = "Accept=application/json")
+//    @ResponseBody
+//    public List<GroupJson> findByGroupId() {
+//
+//
+//    }
 }

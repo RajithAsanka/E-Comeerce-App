@@ -15,7 +15,7 @@ import org.springframework.stereotype.Component;
 
 /**
  *
- * @author Naveen
+ * @author Rajith
  */
 @Component
 public class GroupJsonUtil {
