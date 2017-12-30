@@ -22,11 +22,6 @@
 
   <dependencies>
     <dependency>
-      <groupId>com.nr</groupId>
-      <artifactId>fc-internet</artifactId>
-      <version>1.0</version>
-    </dependency>
-    <dependency>
       <groupId>org.jboss.resteasy</groupId>
       <artifactId>resteasy-client</artifactId>
       <version>${resteasy.version}</version>

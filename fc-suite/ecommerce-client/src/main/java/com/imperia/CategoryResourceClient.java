@@ -1,8 +1,6 @@
 package com.imperia;
 
-import com.nr.fc.request.CategoryRequest;
-
-import javax.ws.rs.core.Response;
+import com.imperia.requests.CategoryRequest;
 
 /**
  * Category Resource Client

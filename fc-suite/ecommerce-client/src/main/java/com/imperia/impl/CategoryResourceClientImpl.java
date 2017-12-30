@@ -2,7 +2,7 @@ package com.imperia.impl;
 
 import com.imperia.CategoryResourceClient;
 import com.imperia.core.AbstractRestClient;
-import com.nr.fc.request.CategoryRequest;
+import com.imperia.requests.CategoryRequest;
 
 import javax.ws.rs.InternalServerErrorException;
 import javax.ws.rs.client.Entity;
