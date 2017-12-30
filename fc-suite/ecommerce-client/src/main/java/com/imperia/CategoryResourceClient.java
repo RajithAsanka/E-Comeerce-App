@@ -1,5 +1,7 @@
 package com.imperia;
 
+import com.nr.fc.request.CategoryRequest;
+
 import javax.ws.rs.core.Response;
 
 /**
@@ -8,5 +10,5 @@ import javax.ws.rs.core.Response;
  */
 public interface CategoryResourceClient {
 
-    Response saveCateogry();
+    CategoryRequest saveCateogry(CategoryRequest categoryRequest);
 }
