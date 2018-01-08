@@ -63,7 +63,7 @@ public class ResourceClientProxyPool {
 
     public CategoryResourceClient getCategoryResourceClient() {
         if (categoryResourceClient == null) {
-            categoryResourceClient = new CategoryResourceClientImpl(this.targetBaseServiceURL + "/category-mgt");
+            categoryResourceClient = new CategoryResourceClientImpl();
         }
         return categoryResourceClient;
     }

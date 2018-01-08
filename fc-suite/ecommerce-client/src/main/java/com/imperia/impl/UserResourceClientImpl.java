@@ -3,10 +3,6 @@ package com.imperia.impl;
 import com.imperia.UserResourceClient;
 import com.imperia.core.AbstractRestClient;
 
-import javax.ws.rs.InternalServerErrorException;
-import javax.ws.rs.core.MultivaluedHashMap;
-import javax.ws.rs.core.Response;
-
 /**
  * Created by Kithmal on 12/5/17.
  */
@@ -18,6 +14,7 @@ public class UserResourceClientImpl extends AbstractRestClient implements UserRe
 
     public String getUser() {
 
+        /**
         Response response = null;
         MultivaluedHashMap<String, Object> parameters = new MultivaluedHashMap<String, Object>() {
         };
@@ -33,6 +30,9 @@ public class UserResourceClientImpl extends AbstractRestClient implements UserRe
         } finally {
             close(response);
         }
+         **/
+
+        return null;
 
     }
     
