@@ -1,22 +1,44 @@
 package com.imperia.impl;
 
 import com.imperia.CategoryResourceClient;
-import com.imperia.core.AbstractRestClient;
 import com.imperia.requests.CategoryRequest;
+import com.sun.jersey.api.client.Client;
+import com.sun.jersey.api.client.ClientResponse;
+import com.sun.jersey.api.client.WebResource;
 
-import javax.ws.rs.InternalServerErrorException;
-import javax.ws.rs.client.Entity;
-import javax.ws.rs.core.MediaType;
-import javax.ws.rs.core.Response;
 
 /**
  * Created by Kithmal on 12/11/17.
  */
-public class CategoryResourceClientImpl extends AbstractRestClient implements CategoryResourceClient {
+public class CategoryResourceClientImpl implements CategoryResourceClient {
 
+
+    public CategoryRequest saveCateogry(CategoryRequest request) {
+
+        Client client = Client.create();
+
+
+        WebResource webResource = client.resource("http://localhost:8080/ecommerce-ws/category-mgt/save");
+        ClientResponse response = webResource.type("application/json").post(ClientResponse.class, request);
+
+        if (response.getStatus() == 201) {
+            throw new RuntimeException("Failed : HTTP error code : "
+                    + response.getStatus());
+        }
+
+        System.out.println("Output from Server .... \n");
+
+        /** Retriev the response from the WS**/
+        CategoryRequest output = response.getEntity(CategoryRequest.class);
+
+        return output;
+    }
+
+    /**
     public CategoryResourceClientImpl(String targetServiceUrl) {
         super(targetServiceUrl);
     }
+
 
     public CategoryRequest saveCateogry(CategoryRequest categoryRequest) {
 
@@ -35,4 +57,6 @@ public class CategoryResourceClientImpl extends AbstractRestClient implements Ca
             close(response);
         }
     }
+     **/
+
 }
