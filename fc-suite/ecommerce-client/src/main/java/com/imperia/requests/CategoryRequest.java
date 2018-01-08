@@ -5,13 +5,16 @@
  */
 package com.imperia.requests;
 
+import java.io.Serializable;
+import javax.xml.bind.annotation.XmlRootElement;
+
 /**
  *
  * @author Rajith
  */
+@XmlRootElement
+public class CategoryRequest implements Serializable {
 
-public class CategoryRequest {
-    
     private String mainCategory;
     private String categoryName;
     private String status;
@@ -87,6 +90,5 @@ public class CategoryRequest {
     public void setUserName(String userName) {
         this.userName = userName;
     }
-    
-    
+
 }

@@ -4,11 +4,12 @@
  * and open the template in the editor.
  */
 package com.nr.fc.controller;
+
 import com.imperia.core.ResourceClientProxyPool;
+import com.imperia.requests.CategoryRequest;
 import com.nr.fc.controller.util.GroupJsonUtil;
 import com.nr.fc.exception.BussinessException;
 import com.nr.fc.json.model.JsonReturn;
-import com.nr.fc.request.CategoryRequest;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -43,13 +44,15 @@ public class CategoryController {
 
         try {
 
-            ResourceClientProxyPool.getInstance().getUserResourceClient().getUser();
+          //  ResourceClientProxyPool.getInstance().getUserResourceClient().getUser();
 
             CategoryRequest categoryRequest = new CategoryRequest();
             categoryRequest.setMainCategory(maincategory);
             categoryRequest.setDescription(description);
             categoryRequest.setStatus(status);
             categoryRequest.setUserName(username);
+
+            ResourceClientProxyPool.getInstance().getCategoryResourceClient().saveCateogry(categoryRequest);
 
             jsonReturn.setSuccess("true");
             jsonReturn.setResult("");
