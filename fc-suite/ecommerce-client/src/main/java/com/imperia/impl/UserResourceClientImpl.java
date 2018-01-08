@@ -1,16 +1,12 @@
 package com.imperia.impl;
 
 import com.imperia.UserResourceClient;
-import com.imperia.core.AbstractRestClient;
+
 
 /**
  * Created by Kithmal on 12/5/17.
  */
-public class UserResourceClientImpl extends AbstractRestClient implements UserResourceClient {
-
-    public UserResourceClientImpl(String targetServiceUrl) {
-        super(targetServiceUrl);
-    }
+public class UserResourceClientImpl implements UserResourceClient {
 
     public String getUser() {
 

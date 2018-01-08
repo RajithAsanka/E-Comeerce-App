@@ -56,7 +56,7 @@ public class ResourceClientProxyPool {
 
     public UserResourceClient getUserResourceClient() {
         if (userResourceClient == null) {
-            userResourceClient = new UserResourceClientImpl(this.targetBaseServiceURL + "/user-mgt");
+            userResourceClient = new UserResourceClientImpl();
         }
         return userResourceClient;
     }
