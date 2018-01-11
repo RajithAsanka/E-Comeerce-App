@@ -15,7 +15,7 @@ public class CategoryResourceClientImpl implements CategoryResourceClient {
 
         Client client = Client.create();
 
-        WebResource webResource = client.resource("http://localhost:8080/ecommerce-ws/category-mgt/save");
+        WebResource webResource = client.resource("http://localhost:9090/ecommerce-ws/category-mgt/save");
         ClientResponse response = webResource.type("application/json").post(ClientResponse.class, request);
 
         if (response.getStatus() == 201) {
