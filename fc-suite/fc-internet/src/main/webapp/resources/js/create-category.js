@@ -2,7 +2,7 @@
 // VARIABLES
 // #############################
 var saveUrl = "create-category/save";
-var readUrl = "create-category/find";
+var readUrl = "create-category/find/all";
 var updateUrl = "create-category/update";
 
 var token = $("#txtSecurityToken").val();
@@ -18,7 +18,7 @@ var addBtn = $("#add");
 function initTable() {
     table = $('#category-table').bootstrapTable({
         method: 'get',
-        url: "" ,
+        url: "",
         cache: false,
         height: 350,
         striped: true,
@@ -72,7 +72,7 @@ $(document).ready(function () {
     //intilizing table
     initTable();
     //common-dropdown functions
-    // loadData();
+    //  loadData();
 });
 
 //#############################
@@ -180,10 +180,9 @@ function validateForm(msg) {
     showSaveconfirmation(msg);
 }
 
-
 clearBtn.click(function () {
     //validator.resetForm();  
-    $('#add').html('Save');
+    $('#add').html('Add');
 });
 
 //#############################
@@ -253,7 +252,7 @@ function showSaveconfirmation(msg) {
 function showSaveMsg(Id) {
     dialogInstance = new BootstrapDialog();
     dialogInstance.setTitle('Save Message');
-    dialogInstance.setMessage("Entry saved!, Group Id is " + Id);
+    dialogInstance.setMessage("Entry saved!, Category name  is " + Id + " .");
     dialogInstance.setType(BootstrapDialog.TYPE_SUCCESS);
     dialogInstance.open();
 
@@ -378,12 +377,11 @@ window.operateEventAddmemeber = {
 };
 
 
-//
-//function loadData() {
-//
-//    //Loads from database
-//    data = ajaxData(readUrl, "GET", token);
-//    //Loading database data to bootstrap table
-//    table.bootstrapTable('load', data);
-//
-//}
+
+function loadData() {
+    clearBtn.click();
+    //Loads from database
+    data = ajaxData(readUrl, "GET", token);
+    //Loading database data to bootstrap table
+    table.bootstrapTable('load', data);
+}

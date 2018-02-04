@@ -1,1 +1,1 @@
-core.app.deploy.service=http://localhost:8080/ecommerce-ws
+core.app.deploy.service=http://localhost:9090/ecommerce-ws

@@ -44,18 +44,18 @@ public class CategoryController {
 
         try {
 
-          //  ResourceClientProxyPool.getInstance().getUserResourceClient().getUser();
-
+            //  ResourceClientProxyPool.getInstance().getUserResourceClient().getUser();
             CategoryRequest categoryRequest = new CategoryRequest();
             categoryRequest.setMainCategory(maincategory);
+            categoryRequest.setCategoryName(categoryName);
             categoryRequest.setDescription(description);
             categoryRequest.setStatus(status);
             categoryRequest.setUserName(username);
 
-            ResourceClientProxyPool.getInstance().getCategoryResourceClient().saveCateogry(categoryRequest);
+            CategoryRequest res = ResourceClientProxyPool.getInstance().getCategoryResourceClient().saveCateogry(categoryRequest);
 
             jsonReturn.setSuccess("true");
-            jsonReturn.setResult("");
+            jsonReturn.setResult(res.getCategoryName());
 
         } catch (BussinessException e) {
             jsonReturn.setSuccess("false");
@@ -95,10 +95,11 @@ public class CategoryController {
         return jsonReturn;
     }
 
-//    @RequestMapping(value = "/find/groups", method = RequestMethod.GET, headers = "Accept=application/json")
-//    @ResponseBody
-//    public List<GroupJson> findByGroupId() {
-//
-//
-//    }
+    @RequestMapping(value = "/find/all", method = RequestMethod.GET, headers = "Accept=application/json")
+    @ResponseBody
+    public void findAll() {
+
+       ResourceClientProxyPool.getInstance().getCategoryResourceClient().findAll();
+
+    }
 }
