@@ -15,6 +15,7 @@ import javax.xml.bind.annotation.XmlRootElement;
 @XmlRootElement
 public class CategoryRequest implements Serializable {
 
+    private String id;
     private String mainCategory;
     private String categoryName;
     private String status;
@@ -89,6 +90,20 @@ public class CategoryRequest implements Serializable {
      */
     public void setUserName(String userName) {
         this.userName = userName;
+    }
+
+    /**
+     * @return the id
+     */
+    public String getId() {
+        return id;
+    }
+
+    /**
+     * @param id the id to set
+     */
+    public void setId(String id) {
+        this.id = id;
     }
 
 }

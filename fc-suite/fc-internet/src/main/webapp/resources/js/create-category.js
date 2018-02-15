@@ -379,7 +379,7 @@ window.operateEventAddmemeber = {
 
 
 function loadData() {
-    clearBtn.click();
+  //  clearBtn.click();
     //Loads from database
     data = ajaxData(readUrl, "GET", token);
     //Loading database data to bootstrap table

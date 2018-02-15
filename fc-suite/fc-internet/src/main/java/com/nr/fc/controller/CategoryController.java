@@ -10,6 +10,8 @@ import com.imperia.requests.CategoryRequest;
 import com.nr.fc.controller.util.GroupJsonUtil;
 import com.nr.fc.exception.BussinessException;
 import com.nr.fc.json.model.JsonReturn;
+import java.util.ArrayList;
+import java.util.List;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -99,7 +101,9 @@ public class CategoryController {
     @ResponseBody
     public void findAll() {
 
-       ResourceClientProxyPool.getInstance().getCategoryResourceClient().findAll();
-
+        List<CategoryRequest> list = new ArrayList<CategoryRequest>();
+        list = ResourceClientProxyPool.getInstance().getCategoryResourceClient().findAll();
+        
+        
     }
 }
