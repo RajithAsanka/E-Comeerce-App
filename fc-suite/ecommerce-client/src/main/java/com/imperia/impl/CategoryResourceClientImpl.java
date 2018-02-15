@@ -2,6 +2,7 @@ package com.imperia.impl;
 
 import com.imperia.CategoryResourceClient;
 import com.imperia.requests.CategoryRequest;
+import com.imperia.response.CategoryResponse;
 import com.sun.jersey.api.client.Client;
 import com.sun.jersey.api.client.ClientResponse;
 import com.sun.jersey.api.client.GenericType;
@@ -38,19 +39,13 @@ public class CategoryResourceClientImpl implements CategoryResourceClient {
         return output;
     }
 
-    public List<CategoryRequest> findAll() {
+    public CategoryResponse findAll() {
 
         Client client = Client.create();
 
         WebResource webResource = client.resource("http://localhost:9090/ecommerce-ws/category-mgt/get-all");
-        ClientResponse response = webResource.type("application/json").get(ClientResponse.class);
-
-        List<CategoryRequest> list = new ArrayList<CategoryRequest>();
-        list = response.getEntity(new GenericType<List<CategoryRequest>>() {
-        });
-
-        return list;
-
+        CategoryResponse response = webResource.type("application/json").get(CategoryResponse.class);
+        return response;
     }
 
 }

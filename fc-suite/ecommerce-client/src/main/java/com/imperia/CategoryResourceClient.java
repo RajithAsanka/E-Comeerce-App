@@ -1,6 +1,8 @@
 package com.imperia;
 
 import com.imperia.requests.CategoryRequest;
+import com.imperia.response.CategoryResponse;
+
 import java.util.List;
 
 /**
@@ -11,7 +13,7 @@ public interface CategoryResourceClient {
 
     CategoryRequest saveCateogry(CategoryRequest categoryRequest);
     
-   List< CategoryRequest> findAll();
+   CategoryResponse findAll();
     
     
 }
